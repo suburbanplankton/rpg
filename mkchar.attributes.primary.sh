@@ -15,6 +15,22 @@ attFloor=200
 attCeiling=0
 echo
 
+# potential stats
+# endurance, education, social standing
+# agility, alertness, vitality, willpower
+# quickness
+# power, finesse, resistance
+# luck
+# magic
+#
+#
+#
+#
+#
+#
+#
+#
+
 for attribute in STR DEX CON CHA INT WIS; do
     attSeed=$(($pointsRemaining/$attIndex))                # Attribute seed recalculated for each attribute
     variant=$((80+RANDOM%40))                              # Each attribute set to +/- 20% of seed value
