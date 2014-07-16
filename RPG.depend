@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1385320478 source:c:\cygwin\home\gary\rpg\main.cpp
+	<iostream>
+
+1405481681 source:c:\cygwin\home\gary\rpg\mkcharacter.attributes.primary.cpp
+	<iostream>
+	<cstdlib>
+
