@@ -6,3 +6,11 @@
 	<iostream>
 	<cstdlib>
 
+1405547998 source:c:\cygwin\home\domg\rpg\mkcharacter.attributes.primary.cpp
+	<fstream>
+	<iostream>
+	<string>
+	<cstdlib>
+	<ctime>
+	<math.h>
+

@@ -1,12 +1,65 @@
+#include <fstream>
 #include <iostream>
+#include <string>
 #include <cstdlib> // for rand() and srand()
 #include <ctime> // for time()
 #include <math.h>
 
 using namespace std;
 
+void readAttributes(string attString,int i)
+{
+    string nextParam;
+    if (attString.find (":",i) != string::npos)
+    {
+        int j = attString.find (":",i);
+        nextParam = attString.substr (i,j-i);
+        cout << "***" << nextParam << endl;
+        readAttributes (attString,j+1);
+    }
+    else
+    {
+        nextParam = attString.substr (i);
+        cout << "***" << nextParam << endl;
+    }
+}
+
 int main()
 {
+
+ifstream iniFile ("stats.ini");
+string strLine = "";
+
+while (iniFile)
+{
+	getline (iniFile, strLine);
+	int i = strLine.find ("=");
+	string param = strLine.substr (0,i);
+	string nextParam = "";
+    cout << "strLine is " << strLine << "\n\n" << endl;
+
+	if (param == "ATTLIST")
+	{
+	    string restOfLine = strLine.substr (i+1);
+        readAttributes (restOfLine,0);
+        cout << "\ndone with function calls\n" << endl;
+//#####################################################################
+        while (restOfLine.find (":",i) != string::npos)
+        {
+            int j = restOfLine.find (":",i);
+            nextParam = restOfLine.substr (i,j-i);
+            cout << "***" << nextParam << endl;
+            restOfLine = restOfLine.substr(j+1);
+        }
+//#####################################################################
+	}
+    else if (param == "ATTRANGE")
+        ;
+    else if (param == "ATTVAR")
+        ;
+}
+
+
 
 // Initial seed value between 80 and 90
 srand(time(0));
@@ -17,14 +70,13 @@ int attIndex = 6;
 int pointsRemaining = pointsTotal;
 float variant = 100.0;
 int attSeed = 0;
+ofstream attFile("Char.attributes.primary");
 /*
-attFile=$PWD/Char.attributes.primary
 cat /dev/null > $attFile
 */
 
 int attFloor=200;
 int attCeiling=0;
-//echo
 
 /*
 # potential stats
@@ -53,9 +105,11 @@ for ( int i=attIndex; i>0; i--)
     else if (aAttValues[i] > attCeiling)
         attCeiling = aAttValues[i];
      cout << aAttNames[i] << "=" << aAttValues[i] << endl;
+     attFile << aAttNames[i] << "=" << aAttValues[i] << endl;
 }
 aAttValues[0]= round(rand() %40 + 80);
 cout << "HT=" << aAttValues[0] << endl;
+attFile << "HT=" << aAttValues[0] << endl;
 
 /*
 #WT=$HT                                                     # Weight directly proportionate to Height
