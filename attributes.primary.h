@@ -14,38 +14,53 @@ void setPrimaryAtts()
 
     map <string, int> primaryAtts;
 
-    primaryAtts["STR"]=0;
-    primaryAtts["DEX"]=0;
-    primaryAtts["CON"]=0;
     primaryAtts["CHR"]=0;
+    primaryAtts["CON"]=0;
+    primaryAtts["DEX"]=0;
     primaryAtts["INT"]=0;
+    primaryAtts["STR"]=0;
     primaryAtts["WIS"]=0;
 
-    int attIndex = 6;
-    int minSeedValue = 80;
-    int maxSeedValue = 90;
+    int primaryAttIndex = 6;
+    int minAttSeed = 80;
+    int maxAttSeed = 90;
     int minAttVariance = 80;
     int maxAttVariance = 120;
+    int minHeightSeed = 60;
+    int maxHeightSeed = 140;
+    int raceHeightModifier = 1;
+    int attFloor = 200;
+    int attCeiling = 0;
 
     srand(time(0));
 
-    int primaryAttSeed = rand() % (maxSeedValue - minSeedValue) + minSeedValue;
-    cout << "inital attribute seed = " << primaryAttSeed << endl;
+    int primaryAttSeed = rand() % (maxAttSeed - minAttSeed) + minAttSeed;
+    cout << "inital attribute seed = " << primaryAttSeed << "\n" << endl;
 
-    int pointsTotal = primaryAttSeed * attIndex;
+    int pointsTotal = primaryAttSeed * primaryAttIndex;
     int pointsRemaining = pointsTotal;
 
     map <string, int>::iterator it;
-    int i = attIndex;
+    int i = primaryAttIndex;
     for ( it = primaryAtts.begin(); it != primaryAtts.end(); ++it )
     {
-        cout << it->first << endl;
+        cout << "points remaining: " << pointsRemaining << endl;
+        cout << it->first << "=";
         int attSeed = pointsRemaining / i;
         float attVariance = rand() % (maxAttVariance - minAttVariance) + minAttVariance;
         it->second = round(attSeed * attVariance / 100);
-        cout << it->second << "\nattribute seed: " << attSeed << ", variant: " << attVariance << endl;
+        cout << it->second << " (attribute seed: " << attSeed << ", variant: " << attVariance << ")" << endl;
         pointsRemaining = pointsRemaining - it->second;
+        if ( it->second < attFloor)
+            attFloor = it->second;
+        if ( it->second > attCeiling)
+            attCeiling = it->second;
+        i--;
     }
+    int heightSeed = (rand() % (maxHeightSeed - minHeightSeed) + minHeightSeed);
+    primaryAtts["HT"] = heightSeed * raceHeightModifier;
+    cout << "HT=" << primaryAtts["HT"] <<  " (height seed: " << heightSeed << ", race modifier: " << raceHeightModifier << ")" << endl;
+    cout << "\nattribute floor: " << attFloor << "\nattribute ceiling: " << attCeiling << endl;
 /*
     {
         if (aAttValues[i] < attFloor)

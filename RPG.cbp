@@ -32,9 +32,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
-		<Unit filename="mkcharacter.attributes.primary.cpp">
-			<Option target="Debug" />
-		</Unit>
+		<Unit filename="attributes.primary.h" />
+		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />

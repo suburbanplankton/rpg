@@ -14,3 +14,15 @@
 	<ctime>
 	<math.h>
 
+1405609483 source:c:\cygwin\home\domg\rpg\main.cpp
+	<iostream>
+	"attributes.primary.h"
+
+1405629510 c:\cygwin\home\domg\rpg\attributes.primary.h
+	<cstdlib>
+	<ctime>
+	<iostream>
+	<map>
+	<math.h>
+	<string>
+
